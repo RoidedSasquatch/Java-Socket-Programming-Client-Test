@@ -69,4 +69,10 @@ public class Client {
             Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
         }
     }
+    
+    public void close() throws IOException {
+        client.close();
+        os.close();
+        is.close();
+    }
 }

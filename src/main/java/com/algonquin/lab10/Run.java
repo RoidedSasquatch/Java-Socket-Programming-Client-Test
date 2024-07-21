@@ -5,6 +5,7 @@
 package com.algonquin.lab10;
 
 import com.algonquin.lab10.client.Client;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Scanner;
  */
 public class Run {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Client client = new Client();
         Scanner keyboard = new Scanner(System.in);
         boolean isFinished = false;
@@ -28,12 +29,14 @@ public class Run {
             client.sendMessage(message);
             
             System.out.println("\nAwaiting response...");
-            response = "\nServer responded with: " + client.receiveMessage();
-            System.out.println(response + "\n");
+            response = client.receiveMessage();
+            System.out.println("\nServer responded with: " + response + "\n");
             
             if(response.equalsIgnoreCase("Finish")) {
                 isFinished = true;
             }
         }
+        keyboard.close();
+        client.close();
     }
 }
